@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+
+# program to manage and display a simple todo list
+# --R, 2022
+
+# make sure there is a todo list for the user
+if ! [ -f ~/.local/share/todo.csv ];
+then
+	touch ~/.local/share/todo.csv
+	echo "no todo list found; created blank list at ~/.local/share/todo.csv"
+fi
+
+# check args and execute
+case $1 in
+
+	# standard behviour--just print the list
+	"")
+		echo -e "\\nTODO:"
+		column ~/.local/share/todo.csv -t -d -s "," -N "ITEM,DESCRIPTION,TIME" | cat -n
+		;;
+
+	# print the short help / usage
+	help)
+		echo -e "\\nRowan's Simple ToDo List"
+		echo "usage:"
+		echo -e "\\ttodo -> print list"
+		echo -e "\\ttodo add TITLE [DESCRIPTION] [DATE/TIME] -> add entry"
+		echo -e "\\t\\tremember to put \"quotes\" around multi-word entries"
+		echo -e "\\t\\tfor just TITLE and [TIME] add \"\" in place of the description"
+		echo -e "\\ttodo remove NUMBER -> remove entry at specified number\\n"
+		;;
+
+	# add entries to the list
+	add)
+
+		if [ ${#BASH_ARGV[@]} -lt 5 ]; then
+
+			entry=""
+	
+			for param in "${BASH_ARGV[@]}"; do
+				entry=",${param}${entry}"
+			done
+
+			echo ${entry:5} | cat >> ~/.local/share/todo.csv
+		else
+			echo "too many arguments! type 'todo help' for usage"
+		fi
+		;;
+
+	# remove entries from the list
+	remove)
+		read -r -p "are you sure you want to remove entry ${2}? [Y/n] " yn
+
+		case $yn in
+			[yY][eE][sS]|[yY]|'')
+				line=$2
+				sed -i ${line}d ~/.local/share/todo.csv
+				;;
+			[nN][oO]|[nN])
+				echo "cancelled remove"
+				;;
+			*)
+				echo "invalid response"
+				;;
+		esac
+		;;
+
+	# handle wrong args
+	*)
+		echo "unrecognised argument $1 type 'todo help' for usage"
+		;;
+esac
