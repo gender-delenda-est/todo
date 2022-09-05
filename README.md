@@ -4,7 +4,7 @@ a simple todo list in bash
 ## installation
 
 put the todo script in your path somewhere (e.g. `~/.local/bin`)
-when you run the script for the first time it will attempt to create a .csv for the list in ~/.local/share; make sure this directory exists first.
+when you run the script for the first time it will attempt to create a .csv for the list in `~/.local/share`; make sure this directory exists first.
 
 ## usage
 ```
