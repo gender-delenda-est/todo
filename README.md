@@ -9,8 +9,10 @@ when you run the script for the first time it will attempt to create a .csv for 
 ## usage
 
 usage:
+```
 	todo -> print list
 	todo add TITLE [DESCRIPTION] [DATE/TIME] -> add entry
 		remember to put "quotes" around multi-word entries
 		for just TITLE and [TIME] add "" in place of the description
 	todo remove NUMBER -> remove entry at specified number
+```
