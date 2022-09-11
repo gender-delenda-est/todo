@@ -19,6 +19,7 @@ case $1 in
 	"")
 		echo -e "\\nTODO:"
 		column ~/.local/share/todo.csv -t -s "," | cat -n
+		echo ""
 		;;
 
 	# print the short help / usage
