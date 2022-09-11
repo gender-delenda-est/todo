@@ -6,8 +6,10 @@
 # make sure there is a todo list for the user
 if ! [ -f ~/.local/share/todo.csv ];
 then
+	mkdir -p ~/.local/share
 	touch ~/.local/share/todo.csv
 	echo "no todo list found; created blank list at ~/.local/share/todo.csv"
+
 fi
 
 # check args and execute
