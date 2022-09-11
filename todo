@@ -18,7 +18,7 @@ case $1 in
 	# standard behviour--just print the list
 	"")
 		echo -e "\\nTODO:"
-		column ~/.local/share/todo.csv -t -d -s "," -N "ITEM,DESCRIPTION,TIME" | cat -n
+		column ~/.local/share/todo.csv -t -s "," | cat -n
 		;;
 
 	# print the short help / usage
